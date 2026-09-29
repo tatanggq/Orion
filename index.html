@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merak Produksi - [Home]</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 12px;
+        }
+        body {
+            background-color: #f0f0e8;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: space-between;
+        }
+        /* Top Menu Bar */
+        .top-menu {
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ccc;
+            padding: 2px 5px;
+            display: flex;
+            gap: 15px;
+        }
+        .top-menu a {
+            color: #000;
+            text-decoration: none;
+            padding: 2px 5px;
+        }
+        .top-menu a:hover {
+            background-color: #e0e0e0;
+        }
+        /* Navigation Tabs */
+        .nav-tabs {
+            background-color: #e8e8df;
+            border-bottom: 1px solid #bbb;
+            display: flex;
+            padding: 4px 5px 0 5px;
+            gap: 2px;
+        }
+        .tab {
+            background-color: #f5f5f0;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        .tab.active {
+            background-color: #fff;
+            font-weight: bold;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+        }
+        /* Content Area */
+        .content {
+            flex: 1;
+            background-color: #fcfcf9;
+            padding: 20px;
+            display: flex;
+            gap: 40px;
+            overflow-y: auto;
+        }
+        .section-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            font-size: 13px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 3px;
+            margin-bottom: 5px;
+        }
+        .menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .menu-list li {
+            position: relative;
+            padding-left: 12px;
+            cursor: pointer;
+        }
+        .menu-list li::before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #666;
+            font-size: 10px;
+        }
+        .menu-list li:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        /* Footer Bottom Bar */
+        .footer-bottom {
+            background-color: #e8e8df;
+            border-top: 1px solid #b0b0b0;
+            padding: 10px 15px;
+        }
+        .footer-brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #000;
+            text-decoration: none;
+            width: fit-content;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        /* Status Bar */
+        .status-bar {
+            background-color: #f0f0f0;
+            border-top: 1px solid #d0d0d0;
+            padding: 3px 10px;
+            display: flex;
+            justify-content: space-between;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <!-- Top Menu -->
+        <div class="top-menu">
+            <a href="#">Lihat</a>
+            <a href="#">Help</a>
+            <a href="#">Ubah Password</a>
+            <a href="#">Close All</a>
+            <a href="#">Refresh Data</a>
+            <a href="#">Styles</a>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="tab active">Home[cite: 1]</div>
+            <div class="tab">Registrasi Harian Produksi</div>
+            <div class="tab">SPB Produksi Jadi HPP[cite: 2]</div>
+            <div class="tab">Jadwal Produksi Harian[cite: 2]</div>
+            <div class="tab">Produksi</div>
+        </div>
+
+        <!-- Main Content Dashboard -->
+        <div class="content">
+            <!-- SETTING -->
+            <div class="section-group">
+                <div class="section-title">⚙ SETTING</div>
+                <ul class="menu-list">
+                    <li>Setting Proses[cite: 1]</li>
+                    <li>Setting PPN[cite: 1]</li>
+                </ul>
+            </div>
+
+            <!-- DATA -->
+            <div class="section-group">
+                <div class="section-title">🗄 DATA</div>
+                <ul class="menu-list">
+                    <li>Tangki[cite: 1]</li>
+                    <li>Mesin[cite: 1]</li>
+                    <li>Sub Departemen[cite: 1]</li>
+                    <li>Kategori Proses[cite: 1]</li>
+                    <li>Barang</li>
+                    <li>Resep</li>
+                    <li>Pegawai[cite: 1]</li>
+                    <li>Pekerjaan[cite: 1]</li>
+                    <li>Urutan Pekerjaan[cite: 1]</li>
+                    <li>Proses Produksi[cite: 1]</li>
+                </ul>
+            </div>
+
+            <!-- TRANSAKSI -->
+            <div class="section-group">
+                <div class="section-title">⇄ TRANSAKSI</div>
+                <ul class="menu-list">
+                    <li>Produksi</li>
+                    <li>Ekspedisi</li>
+                </ul>
+            </div>
+
+            <!-- LAPORAN -->
+            <div class="section-group">
+                <div class="section-title">📋 LAPORAN</div>
+                <ul class="menu-list">
+                    <li>Produksi</li>
+                    <li>Ekspedisi</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <!-- Footer Bottom Section -->
+        <div class="footer-bottom">
+            <div class="footer-brand">PRODUKSI KECAP MERAK[cite: 1]</div>
+            <div class="footer-links">
+                <a href="#">Update No Batch Barang Karantina[cite: 1]</a>
+                <a href="#">Import Data Produksi[cite: 1]</a>
+                <a href="#">Log Off[cite: 1]</a>
+                <a href="#">Exit[cite: 1]</a>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>Login : helmi &nbsp;&nbsp;&nbsp;&nbsp; Versi : 2.0.1.61[cite: 1]</span>
+            <span>29/09/2026</span>
+        </div>
+    </div>
+
+</body>
+</html>
