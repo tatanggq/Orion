@@ -4,233 +4,504 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merak Produksi - [Home]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
             font-family: Tahoma, Arial, sans-serif;
-            font-size: 12px;
+            font-size: 11px;
         }
         body {
             background-color: #f0f0e8;
             color: #000;
+            user-select: none;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            justify-content: space-between;
+            overflow: hidden;
+            margin: 0;
         }
-        /* Top Menu Bar */
-        .top-menu {
-            background-color: #f0f0f0;
-            border-bottom: 1px solid #ccc;
-            padding: 2px 5px;
-            display: flex;
-            gap: 15px;
-        }
-        .top-menu a {
-            color: #000;
-            text-decoration: none;
-            padding: 2px 5px;
-        }
-        .top-menu a:hover {
-            background-color: #e0e0e0;
-        }
-        /* Navigation Tabs */
-        .nav-tabs {
-            background-color: #e8e8df;
-            border-bottom: 1px solid #bbb;
-            display: flex;
-            padding: 4px 5px 0 5px;
-            gap: 2px;
-        }
-        .tab {
-            background-color: #f5f5f0;
-            border: 1px solid #ccc;
-            border-bottom: none;
-            padding: 5px 15px;
+        .win-button {
+            background: linear-gradient(to bottom, #fcfcff 0%, #d8d8d8 100%);
+            border: 1px solid #707070;
+            border-radius: 2px;
+            padding: 3px 12px;
             cursor: pointer;
+            text-align: center;
+        }
+        .win-button:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+            border-color: #3c7fb1;
+        }
+        .win-button:active {
+            background: linear-gradient(to bottom, #d8d8d8 0%, #fcfcff 100%);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #d0d0d0;
+            padding: 4px 8px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        th {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #e4e4e4 100%);
+            font-weight: bold;
+            color: #111;
+        }
+        tr:hover {
+            background-color: #f1f4f9;
+        }
+        input[type="text"], input[type="date"], select {
+            border: 1px solid #7f9db9;
+            padding: 2px 4px;
+            background: #fff;
+        }
+        .tab-item {
+            cursor: pointer;
+            padding: 5px 14px;
+            border: 1px solid #a0a0a0;
+            border-bottom: none;
             border-top-left-radius: 3px;
             border-top-right-radius: 3px;
+            background-color: #d8d8d0;
         }
-        .tab.active {
-            background-color: #fff;
+        .tab-item.active {
+            background-color: #f5f5f0;
             font-weight: bold;
-            border-bottom: 1px solid #fff;
+            border-bottom: 1px solid #f5f5f0;
             margin-bottom: -1px;
-        }
-        /* Content Area */
-        .content {
-            flex: 1;
-            background-color: #fcfcf9;
-            padding: 20px;
-            display: flex;
-            gap: 40px;
-            overflow-y: auto;
-        }
-        .section-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: bold;
-            font-size: 13px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 3px;
-            margin-bottom: 5px;
-        }
-        .menu-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .menu-list li {
-            position: relative;
-            padding-left: 12px;
-            cursor: pointer;
-        }
-        .menu-list li::before {
-            content: "▪";
-            position: absolute;
-            left: 0;
-            color: #666;
-            font-size: 10px;
-        }
-        .menu-list li:hover {
-            color: #0066cc;
-            text-decoration: underline;
-        }
-        /* Footer Bottom Bar */
-        .footer-bottom {
-            background-color: #e8e8df;
-            border-top: 1px solid #b0b0b0;
-            padding: 10px 15px;
-        }
-        .footer-brand {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            margin-bottom: 10px;
-        }
-        .footer-links a {
-            color: #000;
-            text-decoration: none;
-            width: fit-content;
-        }
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        /* Status Bar */
-        .status-bar {
-            background-color: #f0f0f0;
-            border-top: 1px solid #d0d0d0;
-            padding: 3px 10px;
-            display: flex;
-            justify-content: space-between;
-            color: #333;
         }
     </style>
 </head>
-<body>
+<body class="flex flex-col justify-between h-screen">
 
-    <div>
-        <!-- Top Menu -->
-        <div class="top-menu">
-            <a href="#">Lihat</a>
-            <a href="#">Help</a>
-            <a href="#">Ubah Password</a>
-            <a href="#">Close All</a>
-            <a href="#">Refresh Data</a>
-            <a href="#">Styles</a>
+    <!-- TOP APP FRAME -->
+    <div class="flex flex-col flex-grow bg-[#f0f0e8] overflow-hidden">
+        
+        <!-- Top Menu Bar -->
+        <div class="bg-[#f0f0f0] border-b border-[#dfdfdf] px-2 py-1 flex gap-4 text-xs select-none">
+            <span class="cursor-pointer hover:bg-[#d0d0d0] px-1.5 py-0.5 rounded" onclick="openModal('Lihat Menu', 'Menu tampilan utama dan filter jendela diaktifkan.')">Lihat</span>
+            <span class="cursor-pointer hover:bg-[#d0d0d0] px-1.5 py-0.5 rounded" onclick="openModal('Bantuan ORION', 'Merak Produksi Versi: 2.0.1.61\nSistem Manajemen Produksi Kecap Terpadu.')">Help</span>
+            <span class="cursor-pointer hover:bg-[#d0d0d0] px-1.5 py-0.5 rounded" onclick="openModal('Ubah Password', 'Form Ubah Password untuk user login aktif (helmi).')">Ubah Password</span>
+            <span class="cursor-pointer hover:bg-[#d0d0d0] px-1.5 py-0.5 rounded" onclick="switchTab('home')">Close All</span>
+            <span class="cursor-pointer hover:bg-[#d0d0d0] px-1.5 py-0.5 rounded" onclick="openModal('Refresh Data', 'Semua cache dan data tabel berhasil disinkronkan ulang.')">Refresh Data</span>
+            <span class="cursor-pointer hover:bg-[#d0d0d0] px-1.5 py-0.5 rounded" onclick="openModal('Styles', 'Pengaturan tema warna Windows Classic aktif.')">Styles</span>
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="nav-tabs">
-            <div class="tab active">Home[cite: 1]</div>
-            <div class="tab">Registrasi Harian Produksi</div>
-            <div class="tab">SPB Produksi Jadi HPP[cite: 2]</div>
-            <div class="tab">Jadwal Produksi Harian[cite: 2]</div>
-            <div class="tab">Produksi</div>
+        <div class="bg-[#e8e8df] border-b border-[#a0a0a0] px-2 pt-1 flex gap-1 items-end select-none">
+            <div id="tab-home" class="tab-item active" onclick="switchTab('home')">Home</div>
+            <div id="tab-registrasi" class="tab-item" onclick="switchTab('registrasi')">Registrasi Harian Produksi</div>
+            <div id="tab-spb" class="tab-item" onclick="switchTab('spb')">SPB Produksi Jadi HPP</div>
+            <div id="tab-jadwal" class="tab-item" onclick="switchTab('jadwal')">Jadwal Produksi Harian</div>
+            <div id="tab-produksi" class="tab-item" onclick="switchTab('produksi')">Produksi</div>
         </div>
 
-        <!-- Main Content Dashboard -->
-        <div class="content">
-            <!-- SETTING -->
-            <div class="section-group">
-                <div class="section-title">⚙ SETTING</div>
-                <ul class="menu-list">
-                    <li>Setting Proses[cite: 1]</li>
-                    <li>Setting PPN[cite: 1]</li>
-                </ul>
+        <!-- MAIN VIEWS CONTAINER -->
+        <div class="flex-grow flex flex-col overflow-hidden bg-[#fcfcf9]">
+            
+            <!-- VIEW 1: HOME -->
+            <div id="view-home" class="view-panel flex-grow p-6 flex gap-16 overflow-y-auto">
+                <!-- SETTING -->
+                <div class="flex flex-col gap-2">
+                    <div class="font-bold border-b-2 border-black pb-1 flex items-center gap-1 text-[12px]">⚙ SETTING</div>
+                    <ul class="list-none pl-3 flex flex-col gap-1.5 text-xs">
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Setting Proses', 'Konfigurasi master tahapan proses pabrik.')">Setting Proses</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Setting PPN', 'Pengaturan besaran persentase PPN transaksi.')">Setting PPN</li>
+                    </ul>
+                </div>
+
+                <!-- DATA -->
+                <div class="flex flex-col gap-2">
+                    <div class="font-bold border-b-2 border-black pb-1 flex items-center gap-1 text-[12px]">🗄 DATA</div>
+                    <ul class="list-none pl-3 flex flex-col gap-1.5 text-xs">
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Data Tangki', 'Manajemen tangki penampungan cairan & bahan.')">Tangki</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Data Mesin', 'Daftar mesin operasional produksi.')">Mesin</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Sub Departemen', 'Daftar sub departemen kerja.')">Sub Departemen</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Kategori Proses', 'Master kategori (Fermentasi, Giling, Lebur, Masak, Packing, Mixing).')">Kategori Proses</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Data Barang', 'Master SKU / Katalog Barang jadi & bahan baku.')">Barang</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Data Resep', 'Formulasi resep kecap dan takaran.')">Resep</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Data Pegawai', 'Daftar operator & staf pabrik.')">Pegawai</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Pekerjaan', 'Daftar jenis pekerjaan harian.')">Pekerjaan</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Urutan Pekerjaan', 'Pengaturan alur kerja sistem.')">Urutan Pekerjaan</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Proses Produksi', 'Master proses produksi.')">Proses Produksi</li>
+                    </ul>
+                </div>
+
+                <!-- TRANSAKSI -->
+                <div class="flex flex-col gap-2">
+                    <div class="font-bold border-b-2 border-black pb-1 flex items-center gap-1 text-[12px]">⇄ TRANSAKSI</div>
+                    <ul class="list-none pl-3 flex flex-col gap-1.5 text-xs">
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="switchTab('produksi')">Produksi</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Ekspedisi', 'Modul transaksi pengiriman & logistik ekspedisi.')">Ekspedisi</li>
+                    </ul>
+                </div>
+
+                <!-- LAPORAN -->
+                <div class="flex flex-col gap-2">
+                    <div class="font-bold border-b-2 border-black pb-1 flex items-center gap-1 text-[12px]">📋 LAPORAN</div>
+                    <ul class="list-none pl-3 flex flex-col gap-1.5 text-xs">
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Laporan Produksi', 'Pusat unduh laporan rekapitulasi produksi harian.')">Produksi</li>
+                        <li class="cursor-pointer hover:text-blue-600 hover:underline list-disc" onclick="openModal('Laporan Ekspedisi', 'Pusat laporan pengiriman barang.')">Ekspedisi</li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- DATA -->
-            <div class="section-group">
-                <div class="section-title">🗄 DATA</div>
-                <ul class="menu-list">
-                    <li>Tangki[cite: 1]</li>
-                    <li>Mesin[cite: 1]</li>
-                    <li>Sub Departemen[cite: 1]</li>
-                    <li>Kategori Proses[cite: 1]</li>
-                    <li>Barang</li>
-                    <li>Resep</li>
-                    <li>Pegawai[cite: 1]</li>
-                    <li>Pekerjaan[cite: 1]</li>
-                    <li>Urutan Pekerjaan[cite: 1]</li>
-                    <li>Proses Produksi[cite: 1]</li>
-                </ul>
+            <!-- VIEW 2: REGISTRASI HARIAN PRODUKSI -->
+            <div id="view-registrasi" class="view-panel flex-grow p-4 hidden flex flex-col gap-3 overflow-hidden">
+                <div class="flex items-center gap-2 bg-[#f0f0ea] p-2 border border-[#d0d0d0] shrink-0">
+                    <label>Tgl hari ini</label>
+                    <input type="date" id="input-tgl" value="2026-09-29">
+                    <button class="win-button" onclick="openModal('Load Transaksi', 'Memuat ulang daftar registrasi transaksi harian tanggal 29/09/2026.')">Load Trans</button>
+                    <button class="win-button" onclick="openModal('Undo Validasi', 'Membatalkan tanda validasi transaksi terpilih.')">Undo Validasi</button>
+                    <div class="h-4 w-[1px] bg-gray-400 mx-2"></div>
+                    <button class="win-button" onclick="openModal('Export', 'Data registrasi berhasil diexport ke format Excel.')">Export</button>
+                    <button class="win-button" onclick="openModal('Print', 'Mencetak dokumen registrasi harian produksi.')">Print</button>
+                    <button class="win-button" onclick="openModal('Not Checked', 'Menampilkan daftar transaksi yang belum divalidasi.')">Not Checked</button>
+                    <button class="win-button" onclick="openModal('Reset Checked', 'Status centang divalidasi direset.')">Reset Checked</button>
+                    <div class="ml-auto flex items-center gap-1">
+                        <input type="checkbox" checked id="chk-search">
+                        <label for="chk-search">Show Search Footer</label>
+                    </div>
+                </div>
+
+                <div class="flex-grow overflow-auto border border-[#a0a0a0]">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="w-12 text-center">No.</th>
+                                <th>Transaksi</th>
+                                <th class="w-28">User Id</th>
+                                <th class="w-32">Tgl Input</th>
+                                <th class="w-24">Jam Input</th>
+                                <th class="w-16 text-center">[v]</th>
+                                <th class="w-20 text-center">Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reg-tbody">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- TRANSAKSI -->
-            <div class="section-group">
-                <div class="section-title">⇄ TRANSAKSI</div>
-                <ul class="menu-list">
-                    <li>Produksi</li>
-                    <li>Ekspedisi</li>
-                </ul>
+            <!-- VIEW 3: SPB PRODUKSI JADI HPP -->
+            <div id="view-spb" class="view-panel flex-grow p-4 hidden flex flex-col gap-3 overflow-hidden">
+                <div class="flex items-center gap-2 bg-[#f0f0ea] p-2 border border-[#d0d0d0] shrink-0">
+                    <span class="font-bold">Surat Permintaan Barang (SPB) Produksi Jadi HPP</span>
+                    <button class="win-button ml-auto" onclick="openModal('Tambah SPB', 'Form input SPB baru.')">+ Tambah SPB</button>
+                </div>
+                <div class="border border-[#a0a0a0] flex-grow overflow-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No SPB</th>
+                                <th>Tanggal</th>
+                                <th>Gudang Asal</th>
+                                <th>Gudang Tujuan</th>
+                                <th>Status</th>
+                                <th>User ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-blue-700 font-medium">SPB/2026/IX/001</td>
+                                <td>29/09/2026</td>
+                                <td>Gudang Utama Bahan</td>
+                                <td>HPP Produksi</td>
+                                <td><span class="text-green-700 font-bold">Approved</span></td>
+                                <td>helmi</td>
+                            </tr>
+                            <tr>
+                                <td class="text-blue-700 font-medium">SPB/2026/IX/002</td>
+                                <td>29/09/2026</td>
+                                <td>Gudang Botol & Kemasan</td>
+                                <td>Packing Line 1</td>
+                                <td><span class="text-amber-700 font-bold">Pending</span></td>
+                                <td>helmi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- LAPORAN -->
-            <div class="section-group">
-                <div class="section-title">📋 LAPORAN</div>
-                <ul class="menu-list">
-                    <li>Produksi</li>
-                    <li>Ekspedisi</li>
-                </ul>
+            <!-- VIEW 4: JADWAL PRODUKSI HARIAN -->
+            <div id="view-jadwal" class="view-panel flex-grow p-3 hidden flex flex-col gap-3 overflow-hidden">
+                <div class="bg-[#f0f0ea] p-2 border border-[#d0d0d0] flex flex-wrap items-center gap-3 shrink-0">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] text-gray-600">Filter Periode</span>
+                        <div class="flex items-center gap-1">
+                            <span>Dari</span> <input type="date" value="2026-09-29" class="w-28">
+                            <span>Sampai</span> <input type="date" value="2026-09-29" class="w-28">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] text-gray-600">Filter Barang</span>
+                        <div class="flex items-center gap-1">
+                            <span>Kategori Proses</span>
+                            <select class="w-32"><option>SEMUA</option><option>MIXING</option><option>LEBUR</option><option>MASAK</option><option>PACKING</option></select>
+                            <span>Tipe Barang</span>
+                            <select class="w-28"><option>SEMUA</option></select>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mt-4">
+                        <button class="win-button font-bold" onclick="openModal('Load Jadwal', 'Memuat data jadwal berdasarkan filter.')">Load</button>
+                        <button class="win-button" onclick="openModal('Reset Filter', 'Filter dikembalikan ke default.')">Reset</button>
+                    </div>
+                    <div class="ml-auto bg-red-100 border border-red-400 text-red-700 px-3 py-1 rounded text-[11px] font-bold">
+                        ■ Qty Fermentasi = 0 Dan belum ada Qty Hasil
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-1 bg-[#e8e8df] p-1.5 border border-[#d0d0d0] shrink-0">
+                    <button class="win-button" onclick="openModal('Tutup Filter', 'Panel filter disembunyikan.')">Tutup Filter</button>
+                    <button class="win-button font-bold text-blue-700" onclick="openModal('Tambah Jadwal Baru', 'Form input jadwal produksi baru.')">Tambah</button>
+                    <button class="win-button" onclick="openModal('Detail Jadwal', 'Melihat rincian jadwal terpilih.')">Detail</button>
+                    <button class="win-button" onclick="openModal('Edit Jadwal', 'Form ubah data jadwal produksi.')">Edit</button>
+                    <button class="win-button text-red-600" onclick="openModal('Hapus Jadwal', 'Data jadwal yang dipilih akan dihapus.')">Hapus</button>
+                    <button class="win-button" onclick="openModal('Export', 'Jadwal diexport ke Excel.')">Export</button>
+                    <button class="win-button" onclick="openModal('Cetak', 'Mencetak daftar jadwal produksi.')">Cetak</button>
+                    <div class="ml-auto flex items-center gap-1">
+                        <input type="checkbox" checked id="s-footer"><label for="s-footer">Show Search Footer</label>
+                    </div>
+                </div>
+
+                <div class="flex-grow overflow-auto border border-[#a0a0a0]">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="w-8 text-center">[+]</th>
+                                <th>Tanggal</th>
+                                <th>Nomor</th>
+                                <th>Jum. Partai / Satuan</th>
+                                <th>Proses Produksi</th>
+                                <th>Kategori Proses</th>
+                                <th>Hasil</th>
+                                <th>Satuan</th>
+                                <th>Qty</th>
+                                <th>Tgl. Produksi</th>
+                                <th>Tgl. Real</th>
+                                <th>Qty Real</th>
+                                <th>Tangki</th>
+                                <th>No Batch</th>
+                                <th>Keterangan</th>
+                                <th>User Id</th>
+                                <th>Tgl. Input</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jadwal-tbody">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIEW 5: PRODUKSI -->
+            <div id="view-produksi" class="view-panel flex-grow p-4 hidden flex flex-col gap-3 overflow-y-auto">
+                <div class="flex items-center gap-2 bg-[#f0f0ea] p-2 border border-[#d0d0d0]">
+                    <span class="font-bold text-sm">Modul Transaksi & Monitoring Proses Produksi</span>
+                    <button class="win-button ml-auto" onclick="openModal('Batch Baru', 'Membuat nomor batch produksi baru.')">+ Buat Batch Baru</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-[#a0a0a0] p-3 bg-white rounded shadow-sm flex flex-col gap-2">
+                        <h3 class="font-bold border-b pb-1 text-blue-900">1. Mixing & Fermentasi</h3>
+                        <p class="text-gray-600">Pencampuran bahan awal dan fermentasi kedelai.</p>
+                        <button class="win-button mt-auto" onclick="switchTab('jadwal')">Buka Jadwal Mixing</button>
+                    </div>
+                    <div class="border border-[#a0a0a0] p-3 bg-white rounded shadow-sm flex flex-col gap-2">
+                        <h3 class="font-bold border-b pb-1 text-blue-900">2. Masak & Lebur</h3>
+                        <p class="text-gray-600">Pemasakan kecap dan lebur gula.</p>
+                        <button class="win-button mt-auto" onclick="openModal('Masak', 'Modul proses masak & lebur aktif.')">Buka Proses Masak</button>
+                    </div>
+                    <div class="border border-[#a0a0a0] p-3 bg-white rounded shadow-sm flex flex-col gap-2">
+                        <h3 class="font-bold border-b pb-1 text-blue-900">3. Packaging</h3>
+                        <p class="text-gray-600">Pengemasan botol, sachet, dan jerigen.</p>
+                        <button class="win-button mt-auto" onclick="openModal('Packaging', 'Modul pengemasan aktif.')">Buka Proses Packaging</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER / BOTTOM BAR -->
+    <div class="shrink-0 flex flex-col">
+        <div class="bg-[#e8e8df] border-t border-[#b0b0b0] p-3 flex flex-col gap-1">
+            <div class="text-base font-bold text-[#222] tracking-wide">PRODUKSI KECAP MERAK</div>
+            <div class="flex flex-col gap-0.5 text-blue-700 underline text-xs cursor-pointer select-none">
+                <span onclick="openModal('Update No Batch', 'Form Update No Batch Barang Karantina.')">Update No Batch Barang Karantina</span>
+                <span onclick="openModal('Import Data', 'Dialog Import Data Produksi dari file eksternal.')">Import Data Produksi</span>
+                <span onclick="openModal('Log Off', 'Sesi akun helmi diakhiri. Silakan login kembali.')">Log Off</span>
+                <span onclick="openModal('Keluar Aplikasi', 'Aplikasi Merak Produksi ditutup.')">Exit</span>
+            </div>
+        </div>
+
+        <div class="bg-[#f0f0e8] border-t border-[#d0d0d0] px-3 py-1 flex justify-between text-xs text-gray-700 select-none">
+            <span>Login : <b>helmi</b> &nbsp;&nbsp;&nbsp;&nbsp; Versi : 2.0.1.61</span>
+            <span id="footer-date">29/09/2026</span>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP DIALOG -->
+    <div id="modal-box" class="fixed inset-0 bg-black/30 hidden flex items-center justify-center z-50">
+        <div class="bg-[#f0f0e8] border-2 border-[#7f9db9] shadow-2xl w-[440px] rounded flex flex-col">
+            <div class="bg-gradient-to-r from-[#0055ea] to-[#316ac5] text-white px-3 py-1.5 flex justify-between items-center font-bold text-xs">
+                <span id="modal-title">Informasi Sistem</span>
+                <button onclick="closeModal()" class="text-white hover:bg-red-600 px-1.5 rounded font-bold cursor-pointer">×</button>
+            </div>
+            <div id="modal-content" class="p-5 bg-white m-1.5 border border-[#ccc] text-xs min-h-[90px] flex items-center justify-center text-center whitespace-pre-line">
+                Pesan...
+            </div>
+            <div class="p-2 bg-[#f0f0e8] flex justify-end gap-2 border-t border-[#d0d0d0]">
+                <button class="win-button px-4" onclick="closeModal()">Tutup</button>
             </div>
         </div>
     </div>
 
-    <div>
-        <!-- Footer Bottom Section -->
-        <div class="footer-bottom">
-            <div class="footer-brand">PRODUKSI KECAP MERAK[cite: 1]</div>
-            <div class="footer-links">
-                <a href="#">Update No Batch Barang Karantina[cite: 1]</a>
-                <a href="#">Import Data Produksi[cite: 1]</a>
-                <a href="#">Log Off[cite: 1]</a>
-                <a href="#">Exit[cite: 1]</a>
-            </div>
-        </div>
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Registrasi Harian termasuk tambahan "Jadwal Produksi Harian Mixing"
+        const registrasiList = [
+            { no: 1, transaksi: "Jadwal Produksi Harian Mixing", user: "", tgl: "", jam: "", checked: false },
+            { no: 2, transaksi: "Jadwal Produksi Harian Fermentasi", user: "", tgl: "", jam: "", checked: false },
+            { no: 3, transaksi: "Jadwal Produksi Harian Giling", user: "", tgl: "", jam: "", checked: false },
+            { no: 4, transaksi: "Jadwal Produksi Harian Kemasan", user: "", tgl: "", jam: "", checked: false },
+            { no: 5, transaksi: "Jadwal Produksi Harian Lebur", user: "", tgl: "", jam: "", checked: true },
+            { no: 6, transaksi: "Jadwal Produksi Harian Masak", user: "", tgl: "", jam: "", checked: true },
+            { no: 7, transaksi: "Jadwal Produksi Harian Packaging", user: "", tgl: "", jam: "", checked: true },
+            { no: 8, transaksi: "SPB Prod Jadi HPP", user: "helmi", tgl: "29/09/2026", jam: "08:15:22", checked: true },
+            { no: 9, transaksi: "SPB QC Jadi HPP", user: "tata", tgl: "29/09/2026", jam: "08:20:10", checked: false },
+            { no: 10, transaksi: "SPB QC Jadi HPP (WIP)", user: "tata, syaeful", tgl: "29/09/2026", jam: "08:30:00", checked: false },
+            { no: 11, transaksi: "Transaksi Produksi", user: "helmi", tgl: "29/09/2026", jam: "08:45:12", checked: false },
+            { no: 12, transaksi: "SPB Penolong", user: "helmi", tgl: "29/09/2026", jam: "08:50:00", checked: true },
+            { no: 13, transaksi: "Packaging", user: "helmi", tgl: "29/09/2026", jam: "09:00:15", checked: true },
+            { no: 14, transaksi: "SHP (Sisa Hasil Produksi)", user: "Ayi", tgl: "29/09/2026", jam: "09:10:20", checked: true },
+            { no: 15, transaksi: "QC Periksa Proses", user: "", tgl: "", jam: "", checked: false },
+            { no: 16, transaksi: "Sortir Barang Karantina", user: "helmi", tgl: "29/09/2026", jam: "08:59:28", checked: true },
+            { no: 17, transaksi: "SPB Sampling QC", user: "helmi", tgl: "29/09/2026", jam: "09:05:00", checked: false },
+            { no: 18, transaksi: "Mutasi Barang Karantina", user: "helmi", tgl: "29/09/2026", jam: "09:15:00", checked: false },
+            { no: 19, transaksi: "Validasi Data", user: "helmi", tgl: "29/09/2026", jam: "08:16:57", checked: true }
+        ];
 
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <span>Login : helmi &nbsp;&nbsp;&nbsp;&nbsp; Versi : 2.0.1.61[cite: 1]</span>
-            <span>29/09/2026</span>
-        </div>
-    </div>
+        // Data Jadwal Produksi Harian
+        const jadwalList = [
+            { tanggal: "29/09/2026", nomor: "2026/IX/JPH-MIX/3830", partai: "1", proses: "MIXING KECAP SPESIAL", kategori: "MIXING", hasil: "CHILI MIXING MIE GM", satuan: "KILO", qty: "0,00", tglProd: "29/09/2026", tglReal: "-", qtyReal: "0,00", tangki: "-", noBatch: "-", ket: "Baru", user: "helmi", tglInput: "29/09/2026 08:25:46" },
+            { tanggal: "29/09/2026", nomor: "2026/IX/JPH-LBR/3836", partai: "1", proses: "LEBUR AG 2", kategori: "LEBUR", hasil: "AIR GULA 2", satuan: "LITER", qty: "0,00", tglProd: "29/09/2026", tglReal: "-", qtyReal: "0,00", tangki: "-", noBatch: "-", ket: "", user: "helmi", tglInput: "25/09/2026 17:14:59" },
+            { tanggal: "29/09/2026", nomor: "2026/IX/JPH-LBR/3837", partai: "1", proses: "LEBUR AG 4", kategori: "LEBUR", hasil: "AIR GULA 4", satuan: "LITER", qty: "0,00", tglProd: "29/09/2026", tglReal: "-", qtyReal: "0,00", tangki: "-", noBatch: "-", ket: "", user: "helmi", tglInput: "25/09/2026 17:15:11" },
+            { tanggal: "29/09/2026", nomor: "2026/IX/JPH-MSK/3829", partai: "1", proses: "MASAK KECAP RAOS ECHO WELL", kategori: "MASAK", hasil: "KECAP ECHO (WELL)", satuan: "LITER", qty: "0,00", tglProd: "29/09/2026", tglReal: "-", qtyReal: "0,00", tangki: "-", noBatch: "-", ket: "", user: "helmi", tglInput: "29/09/2026 09:09:40" },
+            { tanggal: "29/09/2026", nomor: "2026/IX/JPH-PKG/3842", partai: "1", proses: "PACKING RAOS BANDOENG F237", kategori: "PACKING", hasil: "K-F2371.5 KG", satuan: "PCS", qty: "5.100,00", tglProd: "29/09/2026", tglReal: "-", qtyReal: "5.100,00", tangki: "26142", noBatch: "26142", ket: "Selesai", user: "helmi", tglInput: "25/09/2026 17:16:26" }
+        ];
 
+        window.onload = function() {
+            renderRegistrasi();
+            renderJadwal();
+        };
+
+        // Render tabel registrasi harian
+        function renderRegistrasi() {
+            const tbody = document.getElementById('reg-tbody');
+            tbody.innerHTML = '';
+            registrasiList.forEach(item => {
+                const tr = document.createElement('tr');
+                const isMixing = item.transaksi.includes('Mixing');
+                tr.innerHTML = `
+                    <td class="text-center">${item.no}</td>
+                    <td class="font-medium ${isMixing ? 'text-blue-700 font-bold bg-blue-50' : ''}">${item.transaksi}</td>
+                    <td>${item.user}</td>
+                    <td>${item.tgl}</td>
+                    <td>${item.jam}</td>
+                    <td class="text-center"><input type="checkbox" ${item.checked ? 'checked' : ''} onclick="toggleRegCheck(${item.no})"></td>
+                    <td class="text-center"><button class="win-button px-2 py-0.5 text-[10px]" onclick="openDetail('${item.transaksi}')">...</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function toggleRegCheck(no) {
+            const row = registrasiList.find(r => r.no === no);
+            if (row) row.checked = !row.checked;
+        }
+
+        // Render tabel jadwal produksi
+        function renderJadwal() {
+            const tbody = document.getElementById('jadwal-tbody');
+            tbody.innerHTML = '';
+            jadwalList.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center cursor-pointer font-bold">[+]</td>
+                    <td>${item.tanggal}</td>
+                    <td class="text-blue-700 font-medium">${item.nomor}</td>
+                    <td class="text-center">${item.partai}</td>
+                    <td>${item.proses}</td>
+                    <td><b>${item.kategori}</b></td>
+                    <td>${item.hasil}</td>
+                    <td>${item.satuan}</td>
+                    <td class="text-right">${item.qty}</td>
+                    <td>${item.tglProd}</td>
+                    <td>${item.tglReal}</td>
+                    <td class="text-right">${item.qtyReal}</td>
+                    <td class="text-center">${item.tangki}</td>
+                    <td class="text-center">${item.noBatch}</td>
+                    <td>${item.ket}</td>
+                    <td>${item.user}</td>
+                    <td>${item.tglInput}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Switch Tab Navigation Logic
+        function switchTab(name) {
+            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.view-panel').forEach(v => v.classList.add('hidden'));
+
+            if (name === 'home') {
+                document.getElementById('tab-home').classList.add('active');
+                document.getElementById('view-home').classList.remove('hidden');
+                document.title = "Merak Produksi - [Home]";
+            } else if (name === 'registrasi') {
+                document.getElementById('tab-registrasi').classList.add('active');
+                document.getElementById('view-registrasi').classList.remove('hidden');
+                document.title = "Merak Produksi - [Registrasi Harian Produksi]";
+            } else if (name === 'spb') {
+                document.getElementById('tab-spb').classList.add('active');
+                document.getElementById('view-spb').classList.remove('hidden');
+                document.title = "Merak Produksi - [SPB Produksi Jadi HPP]";
+            } else if (name === 'jadwal') {
+                document.getElementById('tab-jadwal').classList.add('active');
+                document.getElementById('view-jadwal').classList.remove('hidden');
+                document.title = "Merak Produksi - [Jadwal Produksi Harian]";
+            } else if (name === 'produksi') {
+                document.getElementById('tab-produksi').classList.add('active');
+                document.getElementById('view-produksi').classList.remove('hidden');
+                document.title = "Merak Produksi - [Produksi]";
+            }
+        }
+
+        // Modal Controls
+        function openModal(title, msg) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-content').innerText = msg;
+            document.getElementById('modal-box').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-box').classList.add('hidden');
+        }
+
+        function openDetail(transName) {
+            if (transName.includes('Mixing')) {
+                openModal('Detail: ' + transName, 'Form Pengaturan & Monitoring Jadwal Produksi Harian Mixing.\n\nAnda dapat mengubah komposisi bahan pencampuran, target volume liter/kilo, pemilihan tangki adonan, dan operator.');
+            } else {
+                openModal('Detail Transaksi', 'Menampilkan form rincian dan parameter operasional untuk: ' + transName);
+            }
+        }
+    </script>
 </body>
 </html>
